@@ -28,15 +28,15 @@ class Base(DeclarativeBase, AsyncAttrs):
         return {"id": self.id}
 
 
-class Desc(Base):
-    __tablename__ = "descs_"
+class Advertisement(Base):
+    __tablename__ = "advertisements"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    title: Mapped[str] = mapped_column(String, nullable=True, index=True)
-    description: Mapped[str] = mapped_column(String, nullable=True)
-    price: Mapped[int] = mapped_column(Integer, nullable=True, index=True)
-    author: Mapped[str] = mapped_column(String, nullable=True, index=True)
-    create_at: Mapped[datetime.datetime] = mapped_column(
+    title: Mapped[str] = mapped_column(String, nullable=False, index=True)
+    description: Mapped[str] = mapped_column(String, nullable=False)
+    price: Mapped[int] = mapped_column(Integer, nullable=False, index=True)
+    author: Mapped[str] = mapped_column(String, nullable=False, index=True)
+    created_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=False), server_default=func.now()
     )
     updated_at: Mapped[datetime.datetime] = mapped_column(
@@ -52,13 +52,13 @@ class Desc(Base):
             "description": self.description,
             "price": self.price,
             "author": self.author,
-            "create_at": self.create_at.isoformat(),
+            "create_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat(),
         }
 
 
-ORM_OBJ = Desc
-ORM_CLS = type[Desc]
+ORM_OBJ = Advertisement
+ORM_CLS = type[Advertisement]
 
 
 async def init_orm():

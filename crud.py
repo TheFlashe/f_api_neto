@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from models import ORM_CLS, ORM_OBJ, Desc
+from models import ORM_CLS, ORM_OBJ
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -9,13 +9,13 @@ async def add_item(session: AsyncSession, item: ORM_OBJ):
     try:
         await session.commit()
     except IntegrityError as e:
-        raise HTTPException(409, "Desc already in BD!")
+        raise HTTPException(409, "Advertisement already in BD!")
 
 
 async def get_item_by_id(session: AsyncSession, orm_cls: ORM_CLS, item_id: int) -> ORM_OBJ:
     orm_obj = await session.get(orm_cls, item_id)
     if orm_obj is None:
-        raise HTTPException(404, "DESC not found")
+        raise HTTPException(404, "Advertisement not found")
     return orm_obj
 
 

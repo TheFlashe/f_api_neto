@@ -8,7 +8,7 @@ class IdResponse(BaseModel):
     id: int
 
 
-class CreateDescResponse(IdResponse):
+class CreateAdvertisementResponse(IdResponse):
     pass
 
 
@@ -16,11 +16,11 @@ class SuccessResponse(BaseModel):
     status: Literal["success"]
 
 
-class UpdateDescResponse(SuccessResponse):
+class UpdateAdvertisementResponse(SuccessResponse):
     pass
 
 
-class GetDescResponse(BaseModel):
+class GetAdvertisementResponse(BaseModel):
     id: int
     title: str
     description: str
@@ -30,22 +30,22 @@ class GetDescResponse(BaseModel):
     updated_at: datetime | None
 
 
-class SearchDescResponse(BaseModel):
-    results: list[GetDescResponse]
+class SearchAdvertisementResponse(BaseModel):
+    results: list[GetAdvertisementResponse]
 
 
-class DeleteDescResponse(SuccessResponse):
+class DeleteAdvertisementResponse(SuccessResponse):
     pass
 
 
-class CreateDescRequest(BaseModel):
+class CreateAdvertisementRequest(BaseModel):
     title: str
     description: str
     price: int | None = None
     author: str
 
 
-class UpdateDescRequest(BaseModel):
+class UpdateAdvertisementRequest(BaseModel):
     title: str | None = None
     description: str | None = None
     price: int | None = None

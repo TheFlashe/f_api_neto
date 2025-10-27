@@ -9,4 +9,4 @@ async def get_session() -> AsyncSession:
         yield session
 
 
-SessionDependancy = Annotated[AsyncSession, Depends(get_session)]
+SessionDependency = Annotated[AsyncSession, Depends(get_session)]
